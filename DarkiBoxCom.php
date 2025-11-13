@@ -2,7 +2,7 @@
 /*
     DarkiBoxCom host for Synology Download Station
     Version : 0.1
-    Description : Use Darkibox API with API key, using available direct link.
+    Description : Use Darkibox HTTP API with API key, using available direct link.
 */
 
 class DarkiBoxComHosting
@@ -18,7 +18,7 @@ class DarkiBoxComHosting
      * Constructor
      *
      * @param string $url       URL donnée par Download Station
-     * @param string $username  Champ "nom d'utilisateur" (utilisé ici pour les options, ex: local_log=1)
+     * @param string $username  Champ "nom d'utilisateur" (utilisé pour les options, ex: local_log=1)
      * @param string $password  Champ "mot de passe" = API key Darkibox
      * @param array  $hostInfo  Infos fournies par Download Station
      */
@@ -35,7 +35,8 @@ class DarkiBoxComHosting
 
     /**
      * Vérification des identifiants (appelée par Download Station).
-     * On vérifie simplement que la clé API est valide via /api/account/info.
+     * On renvoie LOGIN_FAIL, USER_IS_FREE, ou USER_IS_PREMIUM
+     * selon la doc Synology.
      */
     public function Verify($ClearCookie)
     {
@@ -62,11 +63,18 @@ class DarkiBoxComHosting
             return array(DOWNLOAD_ERROR => ERR_FILE_NO_EXIST);
         }
 
-        // Vérification de la clé API
+        // Vérification de la clé API et type de compte
         $loginResult = $this->Login();
-        if ($loginResult != USER_IS_PREMIUM) {
-            $this->log("GetDownloadInfo : Login / API key invalid");
+
+        if ($loginResult == LOGIN_FAIL) {
+            $this->log("GetDownloadInfo : Login failed");
             return array(DOWNLOAD_ERROR => ERR_FILE_NO_EXIST);
+        }
+
+        if ($loginResult == USER_IS_PREMIUM) {
+            $this->log("GetDownloadInfo : Account is PREMIUM");
+        } elseif ($loginResult == USER_IS_FREE) {
+            $this->log("GetDownloadInfo : Account is FREE");
         }
 
         // Extraction du file_code à partir de l'URL
@@ -123,7 +131,8 @@ class DarkiBoxComHosting
     }
 
     /**
-     * "Login" : vérifie simplement que la clé API est valide via /api/account/info.
+     * "Login" : vérifie la clé API via /api/account/info
+     * et retourne LOGIN_FAIL, USER_IS_FREE ou USER_IS_PREMIUM.
      */
     private function Login()
     {
@@ -136,13 +145,28 @@ class DarkiBoxComHosting
             'key' => $this->ApiKey
         ));
 
-        if ($res && isset($res['status']) && (int)$res['status'] === 200) {
-            $this->log("Login : OK (account/info status=200)");
-            return USER_IS_PREMIUM;
+        if (!$res || !isset($res['status']) || (int)$res['status'] !== 200) {
+            $this->log("Login : account/info error or non-200 status");
+            return LOGIN_FAIL;
         }
 
-        $this->log("Login : Failed (invalid API key or API error)");
-        return LOGIN_FAIL;
+        // Valeur premium remontée par l'API Darkibox : 0 = free, 1 = premium
+        $premiumFlag = null;
+        if (isset($res['result']) && isset($res['result']['premium'])) {
+            $premiumFlag = (int)$res['result']['premium'];
+        }
+
+        if ($premiumFlag === 1) {
+            $this->log("Login : premium=1 → USER_IS_PREMIUM");
+            return USER_IS_PREMIUM;
+        } elseif ($premiumFlag === 0) {
+            $this->log("Login : premium=0 → USER_IS_FREE");
+            return USER_IS_FREE;
+        } else {
+            // Cas non documenté : on considère free par défaut
+            $this->log("Login : premium flag not found or unknown → USER_IS_FREE");
+            return USER_IS_FREE;
+        }
     }
 
     /**
