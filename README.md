@@ -1,17 +1,17 @@
-### 📦 DarkiBoxCom — Synology Download Station Host
+# 📦 DarkiBoxCom — Synology Download Station Host
 Version : 0.1 — Téléchargement Darkibox via l'API
 
-# 📥 Téléchargement
+### 📥 Téléchargement
 
 👉 [DarkiBoxCom(0.1).host]() 
 
-# 📝 Présentation
+### 📝 Présentation
 
 DarkiBoxCom(0.1) est un module .host destiné à Synology Download Station permettant de télécharger automatiquement des fichiers depuis Darkibox, en utilisant l’API officielle (Premium).
 
 **⚠️Attention, seuls les comptes premium peuvent télécharger par ce module API, aux dernières nouvelles⚠️**
 
-# 🚀 Installation
+### 🚀 Installation
 
 Téléchargez le fichier :
 👉 DarkiBoxCom(0.1).host
@@ -42,7 +42,7 @@ Pour activer les logs :
 local_log=1 dans le champ Nom d’utilisateur.
 
 
-# ❓ FAQ
+### ❓ FAQ
 1. Le module me dit “Utilisateur incorrect”
 Deux causes possibles :
 Vous avez laissé le champ “Nom d’utilisateur” vide
@@ -65,6 +65,6 @@ Non. Il utilise la meilleure version disponible renvoyée par l’API.
 Vous pouvez m'envoyer un message dur Discord. 
 Pseudo Discord : castorin
 
-# 🧾 Changelog
+### 🧾 Changelog
 0.1 – Première version en test.
 
