@@ -20,21 +20,24 @@ Sélectionnez le fichier .host
 Sélectionner le service (Modifier/double click) pour paramétrer le compte de téléchargement)
 
 **Parametres du compte**
+
 Dans les paramettres de Download Station, indiquez votre compte afin de vous connecter pour l'hébergeur DarkiBoxCom :
 
 Nom d’utilisateur : api (ou local_log=1 pour activer les logs, voir FAQ)
 Mot de passe :	Votre API Key Darkibox
 
 **🔑 Où trouver votre Clé API Darkibox ?**
+
 Dans votre [compte Darkibox](https://darkibox.com/?op=my_account ) :
 Menu → API Key
 Copiez-collez la clé dans le champ “Mot de passe” du module.
 
-**▶️ Utilisation** 
+**▶️ Utilisation**
+
 Pour télécharger un fichier, ajoutez simplement un lien Darkibox dans Download Station.
 
 
-** 📝 Logs**
+**📝 Logs**
 
 Pour activer les logs :
 local_log=1 dans le champ Nom d’utilisateur.
