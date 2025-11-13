@@ -13,13 +13,11 @@ DarkiBoxCom(0.1) est un module .host destiné à Synology Download Station perme
 
 ### 🚀 Installation
 
-Téléchargez le fichier :
-👉 DarkiBoxCom(0.1).host
-
+Téléchargez le fichier .host
 Ouvrez Download Station :
 Paramètres → Fichier d’hébergement → Ajouter
 Sélectionnez le fichier .host
-Sélectionner le service (Modifier/double click) pour paramétrer le compte de létéchargement)
+Sélectionner le service (Modifier/double click) pour paramétrer le compte de téléchargement)
 
 **Parametres du compte**
 Dans les paramettres de Download Station, indiquez votre compte afin de vous connecter pour l'hébergeur DarkiBoxCom :
