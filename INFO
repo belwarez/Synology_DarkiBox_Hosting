@@ -1,0 +1,10 @@
+{
+  "name": "DarkiBoxCom",
+  "hostprefix": "darkibox.com",
+  "displayname": "DarkiBoxCom",
+  "version": "0.1",
+  "authentication": "yes",
+  "module": "DarkiBoxCom.php",
+  "class": "DarkiBoxComHosting",
+  "description": "DarkiBox API"
+}
