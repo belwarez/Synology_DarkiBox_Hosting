@@ -53,15 +53,11 @@ Solution :
 → vérifier que “Mot de passe” = votre clé API complète
 
 2. J’ai “Fichier(s) non trouvé(s)”
+
 Cela veut dire que l’API /file/direct_link n’a pas fourni de lien direct.
-Vérifiez :
-que votre compte est Premium
-que le fichier existe bien
+Vérifiez que votre compte est Premium et que le fichier existe bien.
 
-3. Le module force-t-il une qualité ?
-Non. Il utilise la meilleure version disponible renvoyée par l’API.
-
-4. Comment faire un rapport de bug ?
+3. Comment faire un rapport de bug ?
 
 Vous pouvez m'envoyer un message dur Discord. 
 Pseudo Discord : castorin
